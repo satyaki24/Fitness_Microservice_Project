@@ -7,4 +7,6 @@ public interface UserService {
     UserResponseDto getUserProfile(String userId);
 
     UserResponseDto register(RegisterRequestDto request);
+
+    Boolean existByUserId(String userId);
 }

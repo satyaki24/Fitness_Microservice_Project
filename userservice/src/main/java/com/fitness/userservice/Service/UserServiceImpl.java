@@ -5,10 +5,12 @@ import com.fitness.userservice.DTO.UserResponseDto;
 import com.fitness.userservice.Entity.User;
 import com.fitness.userservice.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
@@ -57,5 +59,11 @@ public class UserServiceImpl implements UserService{
         userResponseDto.setUpdatedAt(savedUser.getUpdatedAt());
 
         return userResponseDto;
+    }
+
+    @Override
+    public Boolean existByUserId(String userId) {
+        log.info("Calling User Validation API for User with Id: {}", userId);
+        return userRepository.existsById(userId);
     }
 }
