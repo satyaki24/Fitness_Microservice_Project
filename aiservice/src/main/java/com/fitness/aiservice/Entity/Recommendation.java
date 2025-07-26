@@ -21,8 +21,8 @@ public class Recommendation {
     private String activityType;
     private String recommendation;
     private List<String> improvements;
-    private String suggestions;
-    private String safety;
+    private List<String> suggestions;
+    private List<String> safety;
     @CreatedDate
     private LocalDateTime createdAt;
 }

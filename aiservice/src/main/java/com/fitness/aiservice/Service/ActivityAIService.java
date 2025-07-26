@@ -1,7 +1,8 @@
 package com.fitness.aiservice.Service;
 
 import com.fitness.aiservice.Entity.Activity;
+import com.fitness.aiservice.Entity.Recommendation;
 
 public interface ActivityAIService {
-    String generateRecommendation(Activity activity);
+    Recommendation generateRecommendation(Activity activity);
 }
