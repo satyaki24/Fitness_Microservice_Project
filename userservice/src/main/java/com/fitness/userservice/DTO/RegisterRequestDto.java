@@ -15,6 +15,8 @@ public class RegisterRequestDto {
     @Size(min = 6, message = "Password size must be >=6")
     private String password;
 
+    private String keycloakId;
+
     @NotBlank(message = "First name is required")
     private String firstName;
 

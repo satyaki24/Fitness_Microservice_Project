@@ -37,7 +37,19 @@ public class UserServiceImpl implements UserService{
     public UserResponseDto register(RegisterRequestDto request) {
 
         if(userRepository.existsByEmail(request.getEmail())){
-            throw new RuntimeException("Account already exists with email " + request.getEmail());
+            User existingUser= userRepository.findByEmail(request.getEmail());
+
+            UserResponseDto userResponseDto=new UserResponseDto();
+
+            userResponseDto.setId(existingUser.getId());
+            userResponseDto.setKeycloakId(existingUser.getKeycloakId());
+            userResponseDto.setEmail(existingUser.getEmail());
+            userResponseDto.setPassword(existingUser.getPassword());
+            userResponseDto.setFirstName(existingUser.getFirstName());
+            userResponseDto.setLastName(existingUser.getLastName());
+            userResponseDto.setCreatedAt(existingUser.getCreatedAt());
+            userResponseDto.setUpdatedAt(existingUser.getUpdatedAt());
+            return userResponseDto;
         }
 
         User user=new User();
@@ -51,6 +63,7 @@ public class UserServiceImpl implements UserService{
         UserResponseDto userResponseDto=new UserResponseDto();
 
         userResponseDto.setId(savedUser.getId());
+        userResponseDto.setKeycloakId(savedUser.getKeycloakId());
         userResponseDto.setEmail(savedUser.getEmail());
         userResponseDto.setPassword(savedUser.getPassword());
         userResponseDto.setFirstName(savedUser.getFirstName());
@@ -64,6 +77,6 @@ public class UserServiceImpl implements UserService{
     @Override
     public Boolean existByUserId(String userId) {
         log.info("Calling User Validation API for User with Id: {}", userId);
-        return userRepository.existsById(userId);
+        return userRepository.existsByKeycloakId(userId);
     }
 }
